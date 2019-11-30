@@ -2,15 +2,13 @@ import sys
 from aubio import source, pitch
 import soundfile as sf
 
-##
-##if len(sys.argv) < 2:
-##    print("Usage: %s <filename> [samplerate]" % sys.argv[0])
-##    sys.exit(1)
-
-#filename = sys.argv[1]
-
 def get_pitches(filename):
 
+    """
+    Take in the filename (was audio file) as a string ex: "song1.wav"
+
+    Returns [(time is seconds, pitch in frequency I think)], total time
+    """
 
     #def get_pitches(filename):
         
