@@ -7,3 +7,5 @@ An API for reproducing songs in other languages than the original. `lango-tune` 
 - **Production**: `python setup.py install`
 
 Add packages/dependencies to `requirements.txt` as necessary to ensure the app builds.
+
+__NOTE__: All project modules and code *must* go into the `src` directory, or else setup will not detect them.
