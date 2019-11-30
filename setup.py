@@ -18,8 +18,8 @@ def parse_requirements(file_path="requirements.txt"):
     path: path to requirements.txt
     """
     requirements = []
-    if path.isfile(path):
-        with open(path, 'r') as f:
+    if path.isfile(file_path):
+        with open(file_path, 'r') as f:
             lines = f.read().splitlines()
             requirements = [
                 line.split(COMMENT)[0].strip() 
