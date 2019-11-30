@@ -11,6 +11,9 @@ import soundfile as sf
 from gtts import gTTS
 
 DEFAULT_DIR = "temp/"
+if not os.path.isdir(DEFAULT_DIR):
+    os.mkdir(DEFAULT_DIR)
+
 DEFAULT_FILE = "tts_audio"
 FILE_TYPE = ".wav"
 SEP = '_'
