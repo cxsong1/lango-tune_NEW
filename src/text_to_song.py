@@ -62,7 +62,7 @@ def squish_audio(file_path, duration, overwrite=False):
         # Rename output file if do not wish to overwrite
         if not overwrite:
             file_name, file_extension = os.path.splitext(file_path)
-            file_path = f"{file_name}{SEP}{duration}{file_extension}"
+            file_path = f"{file_name.split(SEP)}{SEP}{int(round(duration))}{file_extension}"
         # Save output file
         sf.write(file_path, new_ts, sample_rate)
         return file_path
@@ -83,7 +83,7 @@ def pitch_audio(file_path, pitch_data, overwrite=False):
         print(f"pitch_audio: provided file does not exist: {file_path}")
         return None
     else:
-        print(f"pitch_audio: parsing pitch_data containing {len(pitch_data)} notes with time_series of length{time_series.shape[1]}")
+        print(f"pitch_audio: parsing pitch_data containing {len(pitch_data)} notes with time_series of shape {time_series.shape}")
         duration = librosa.get_duration(time_series)
         pitch_time_bins = []
         prev_t = 0
@@ -115,6 +115,7 @@ def pitch_audio(file_path, pitch_data, overwrite=False):
         pitched_audio_ts = np.asarray(pitched_audio_ts)
         if not overwrite:
             file_name, file_extension = os.path.splitext(file_path)
+            file_name = SEP.join(file_name)
             file_path = f"{file_name}{SEP}pitched{file_extension}"
         # Save output file
         sf.write(file_path, pitched_audio_ts, sample_rate)
