@@ -88,6 +88,7 @@ def pitch_audio(file_path, pitch_data, overwrite=False):
         prev_idx = 0
         num_bins = time_series.size
         # Add final data point matching last data point in time series at end of duration
+        pitch_data = [pitch_data[i] for i in range(len(pitch_data)) if i % 5 == 0]
         pitch_data.append((1, pitch_data[-1][1]))
         # Slice audio time series into bins based on pitch_data
         for rel_t, pitch in pitch_data:
@@ -106,9 +107,10 @@ def pitch_audio(file_path, pitch_data, overwrite=False):
             curr_p = pt[np.where(mg == np.max(mg))[0]][0]
             # Find number of steps to requested pitch (in semitones)
             if curr_p:
-                delta = 12 * math.log2(pitch/curr_p)
+                delta = 12 * math.log2(8*pitch/curr_p)
             else:
                 delta = 0 # Avoid division by 0 for silence
+            print(delta)
             # Shift pitch and append to new time series
             pitched_audio_ts = np.append(
                 pitched_audio_ts,
@@ -121,7 +123,6 @@ def pitch_audio(file_path, pitch_data, overwrite=False):
         if not overwrite:
             file_name, file_extension = os.path.splitext(file_path)
             file_path = f"{file_name}{SEP}pitched{file_extension}"
-        print(pitched_audio_ts)
         # Save output file
         sf.write(file_path, pitched_audio_ts, sample_rate)
         return file_path
