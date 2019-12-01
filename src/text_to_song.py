@@ -87,7 +87,7 @@ def pitch_audio(file_path, pitch_data, overwrite=False):
         duration = librosa.get_duration(time_series)
         pitch_time_bins = []
         prev_idx = 0
-        num_bins = time_series[0].size
+        num_bins = time_series.size
         # Add final data point matching last data point in time series at end of duration
         pitch_data.append((1, pitch_data[-1][1]))
         # Slice audio time series into bins based on pitch_data
@@ -95,7 +95,7 @@ def pitch_audio(file_path, pitch_data, overwrite=False):
             curr_idx = int(math.floor(rel_t*num_bins))
             pitch_time_bins.append((
                 pitch,
-                time_series[:][prev_idx:curr_idx]))
+                time_series[prev_idx:curr_idx]))
             prev_idx = curr_idx
         # Apply pitching to individual bins
         pitched_audio_ts = []
