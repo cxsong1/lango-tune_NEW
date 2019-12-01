@@ -104,6 +104,7 @@ def pitch_audio(file_path, pitch_data, overwrite=False):
             pt, mg = librosa.piptrack(ts, sample_rate)
             pt = np.sum(pt, axis=1)
             mg = np.sum(mg, axis=1)
+            mg[0] = 0 # Ignore silence
             curr_p = pt[np.where(mg == np.max(mg))[0]]
             # Find number of steps to requested pitch (in semitones)
             delta = 12 * math.log2(pitch/curr_p)
