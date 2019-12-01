@@ -5,6 +5,7 @@ from multi-lingual text
 import math
 import os
 
+import crepe
 import librosa
 import numpy as np
 import soundfile as sf
@@ -101,13 +102,11 @@ def pitch_audio(file_path, pitch_data, overwrite=False):
         pitched_audio_ts = np.asarray([])
         for pitch, ts in pitch_time_bins:
             # Estimate current pitch of bin (find largest peak in FFT)
-            pt, mg = librosa.piptrack(ts, sample_rate)
-            pt = np.sum(pt, axis=1)
-            mg = np.sum(mg, axis=1)
-            curr_p = pt[np.where(mg == np.max(mg))[0]][0]
+            time, freq, _, _ = crepe.predict(ts, sample_rate, model_capacity='small')
+            curr_p = np.sum(freq)/time[-1]
             # Find number of steps to requested pitch (in semitones)
             if curr_p:
-                delta = 12 * math.log2(8*pitch/curr_p)
+                delta = 12 * math.log2(pitch/curr_p)
             else:
                 delta = 0 # Avoid division by 0 for silence
             print(delta)
