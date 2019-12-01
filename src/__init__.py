@@ -3,10 +3,16 @@ Functions defining behaviour of all Flask endpoints
 """
 from traceback import format_exc
 
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
+
 from werkzeug.exceptions import HTTPException
 
 from .flask_utils import api_call
+
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 APP = Flask(__name__)
 
@@ -17,6 +23,11 @@ def home():
 @APP.route('/api')
 def api():
     return api_call()
+
+@app.route('/', methods=['POST'])
+def post_song():
+    api_call()
+    return render_template("layout.html")
 
 @APP.route('/health')
 def health():
