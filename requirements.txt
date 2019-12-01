@@ -1,5 +1,8 @@
 aubio~=0.4.9
+flask~=1.1.1
 googletrans~=2.4.0
 gtts~=2.0.4
 librosa~=0.7
 lyrics-extractor~=2.2.3
+requests~=2.22.0
+Werkzeug~=0.16.0

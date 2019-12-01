@@ -33,8 +33,7 @@ def generate_speech(message, lang, out_path=None):
 
     returns: output file path
     """
-    if not out_path:
-        out_path = os.path.join(DEFAULT_DIR, f"{DEFAULT_FILE}{SEP}{COPY}{FILE_TYPE}")
+    out_path = os.path.join(DEFAULT_DIR, out_path or f"{DEFAULT_FILE}{SEP}{COPY}{FILE_TYPE}")
     # Use gTTS module functions lol
     tts = gTTS(message, lang=lang)
     tts.save(out_path)
