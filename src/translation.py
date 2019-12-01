@@ -36,3 +36,4 @@ def linebreak(lyrics, destination_lang):
             startIndex = i+1
         i += 1
     return translatedLyrics
+

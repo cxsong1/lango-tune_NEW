@@ -9,6 +9,9 @@ import librosa
 import numpy as np
 import soundfile as sf
 from gtts import gTTS
+import translation as t
+
+
 
 DEFAULT_DIR = "temp/"
 if not os.path.isdir(DEFAULT_DIR):
@@ -34,8 +37,9 @@ def generate_speech(message, lang, out_path=None):
     returns: output file path
     """
     out_path = os.path.join(DEFAULT_DIR, out_path or f"{DEFAULT_FILE}{SEP}{COPY}{FILE_TYPE}")
+    new_mess = t.linebreak(message, lang)
     # Use gTTS module functions lol
-    tts = gTTS(message, lang=lang)
+    tts = gTTS(new_mess, lang=lang)
     tts.save(out_path)
     return out_path
 

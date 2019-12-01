@@ -11,7 +11,7 @@ time = 90
 #time = 207
 
 
-new_path_1 = tts.generate_speech(lyrics, "fr")
+new_path_1 = tts.generate_speech(lyrics, "ru")
 
 new_path_2 = tts.squish_audio(new_path_1, time)
 
