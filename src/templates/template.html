@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h3> Enter a song name:</h3>
+  <form method="POST" class="navbar-form navbar-left" role="search">
+    <div class="form-group">
+      <input name="song_name" type="text" class="form-control" placeholder="Type here">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+  <div id="google_translate_element"></div>
+  <br>
+  <p>My string: {{my_string}}</p>
+  <p>Value from the list: {{my_list[3]}}</p>
+  <p>Loop through the list:</p>
+  <ul>
+    {% for n in my_list %}
+    <li>{{n}}</li>
+    {% endfor %}
+  </ul>
+  <h3> This is the end of my child template</h3>
+{% endblock %}
