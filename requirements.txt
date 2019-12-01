@@ -1,0 +1,4 @@
+aubio~=0.4.9
+googletrans~=2.4.0
+gtts~=2.0.4
+librosa~=0.7
