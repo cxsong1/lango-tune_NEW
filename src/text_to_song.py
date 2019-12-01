@@ -104,10 +104,12 @@ def pitch_audio(file_path, pitch_data, overwrite=False):
             pt, mg = librosa.piptrack(ts, sample_rate)
             pt = np.sum(pt, axis=1)
             mg = np.sum(mg, axis=1)
-            mg[0] = 0 # Ignore silence
             curr_p = pt[np.where(mg == np.max(mg))[0]]
             # Find number of steps to requested pitch (in semitones)
-            delta = 12 * math.log2(pitch/curr_p)
+            if curr_p:
+                delta = 12 * math.log2(pitch/curr_p)
+            else:
+                delta = 0 # Avoid division by 0 for silence
             # Shift pitch and append to new time series
             pitched_audio_ts.append(librosa.effects.pitch_shift(
                 ts,
