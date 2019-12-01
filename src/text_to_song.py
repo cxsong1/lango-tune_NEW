@@ -57,9 +57,8 @@ def squish_audio(file_path, duration, overwrite=False):
         return None
     else:
         old_duration = librosa.get_duration(time_series)
-        desired_ratio = old_duration/duration
-        print(desired_ratio)
-        new_ts = librosa.effects.time_stretch(time_series, desired_ratio)
+        speed = old_duration/duration
+        new_ts = librosa.effects.time_stretch(time_series, speed)
         # Rename output file if do not wish to overwrite
         if not overwrite:
             file_name, file_extension = os.path.splitext(file_path)
