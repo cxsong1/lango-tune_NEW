@@ -1,6 +1,14 @@
 import json
 from acrcloud.recognizer import ACRCloudRecognizer
 
+"""
+Recognizes and returns the name of a song given an audio/media file (ex. mp3, mp4, wav etc.)
+
+@:param 
+    filePath: string with the location of the audio file on your computer
+@:return 
+    The title of the song contained in the file
+"""
 def getTitle(filePath):
     if __name__ == '__main__':
         config = {
@@ -15,6 +23,7 @@ def getTitle(filePath):
         songJson =json.loads(songInfo)
         print(songJson["metadata"]["music"][0]["title"])
 
-getTitle(r"C:\Users\cxson\OneDrive\Documents\song1_4.wav")
+#example call:
+#getTitle(r"C:\Users\cxson\OneDrive\Documents\coeur-de-pirate-place-de-la-republique.mp3")
 
 
