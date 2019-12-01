@@ -57,7 +57,8 @@ def squish_audio(file_path, duration, overwrite=False):
         return None
     else:
         old_duration = librosa.get_duration(time_series)
-        desired_ratio = duration/old_duration
+        desired_ratio = old_duration/duration
+        print(desired_ratio)
         new_ts = librosa.effects.time_stretch(time_series, desired_ratio)
         # Rename output file if do not wish to overwrite
         if not overwrite:
@@ -98,7 +99,7 @@ def pitch_audio(file_path, pitch_data, overwrite=False):
                 time_series[prev_idx:curr_idx]))
             prev_idx = curr_idx
         # Apply pitching to individual bins
-        pitched_audio_ts = []
+        pitched_audio_ts = np.asarray([])
         for pitch, ts in pitch_time_bins:
             # Estimate current pitch of bin (find largest peak in FFT)
             pt, mg = librosa.piptrack(ts, sample_rate)
@@ -111,16 +112,18 @@ def pitch_audio(file_path, pitch_data, overwrite=False):
             else:
                 delta = 0 # Avoid division by 0 for silence
             # Shift pitch and append to new time series
-            pitched_audio_ts.append(librosa.effects.pitch_shift(
-                ts,
-                sample_rate,
-                delta
-            ))
-        pitched_audio_ts = np.asarray(pitched_audio_ts)
+            pitched_audio_ts = np.append(
+                pitched_audio_ts,
+                librosa.effects.pitch_shift(
+                    ts,
+                    sample_rate,
+                    delta
+                )
+            )
         if not overwrite:
             file_name, file_extension = os.path.splitext(file_path)
-            file_name = SEP.join(file_name)
             file_path = f"{file_name}{SEP}pitched{file_extension}"
+        print(pitched_audio_ts)
         # Save output file
         sf.write(file_path, pitched_audio_ts, sample_rate)
         return file_path
