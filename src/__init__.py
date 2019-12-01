@@ -1,10 +1,9 @@
 """
 Functions defining behaviour of all Flask endpoints
 """
-from json import jsonify
 from traceback import format_exc
 
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from werkzeug.exceptions import HTTPException
 
 from .flask_utils import api_call
