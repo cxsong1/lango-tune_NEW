@@ -8,7 +8,7 @@ def song_lyric_extract(songtitle):
     cutom engine and produces the lyrics as a string. 
     """
 
-    extract_lyrics = Song_Lyrics("AIzaSyCtjCkXwCKC5ZPMSVk6UMvBC4kbsm-QaSE",
+    extract_lyrics = Song_Lyrics("AIzaSyBJDsNpx_7yc7spOSM60YCGzRBwXkiXT-I",
                                  "003304024142726018998:qpokd7ayxyi" )
 
     song_title, song_lyrics = extract_lyrics.get_lyrics(songtitle)
