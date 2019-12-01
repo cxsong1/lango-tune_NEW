@@ -10,8 +10,6 @@ print(time)
 
 new_path_1 = tts.generate_speech(lyrics, "en")
 
-
-
 new_path_2 = tts.squish_audio(new_path_1, time)
 
 new_song= tts.pitch_audio(new_path_2, notes)

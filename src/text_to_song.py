@@ -17,6 +17,10 @@ if not os.path.isdir(DEFAULT_DIR):
 DEFAULT_FILE = "tts_audio"
 FILE_TYPE = ".wav"
 SEP = '_'
+COPY = 'copy'
+
+def parse_name(file_path):
+    file_name.split(SEP)
 
 def generate_speech(message, lang, out_path=None):
     """
@@ -30,11 +34,7 @@ def generate_speech(message, lang, out_path=None):
     returns: output file path
     """
     if not out_path:
-        existing_nums = [
-            int(os.path.splitext(f.split(SEP)[-1])[0])
-            for f in os.listdir(DEFAULT_DIR)]
-        num = str((max(existing_nums) if existing_nums else -1) + 1)
-        out_path = os.path.join(DEFAULT_DIR, f"{DEFAULT_FILE}{SEP}{num}{FILE_TYPE}")
+        out_path = os.path.join(DEFAULT_DIR, f"{DEFAULT_FILE}{SEP}{COPY}{FILE_TYPE}")
     # Use gTTS module functions lol
     tts = gTTS(message, lang=lang)
     tts.save(out_path)
@@ -62,7 +62,7 @@ def squish_audio(file_path, duration, overwrite=False):
         # Rename output file if do not wish to overwrite
         if not overwrite:
             file_name, file_extension = os.path.splitext(file_path)
-            file_path = f"{file_name.split(SEP)}{SEP}{int(round(duration))}{file_extension}"
+            file_path = f"{file_name}{SEP}{int(round(duration))}{file_extension}"
         # Save output file
         sf.write(file_path, new_ts, sample_rate)
         return file_path
