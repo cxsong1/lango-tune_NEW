@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>lango-tune</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+      .container {
+        max-width: 500px;
+        padding-top: 100px;
+      }
+      h2 {color: red;}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Welcome to lango-tune <img src="https://img.icons8.com/nolan/64/000000/headphones.png"/></h2>
+      <br>
+        <h3> Enter a song name:</h3>
+        <form method="POST" class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input name="song_name" type="text" class="form-control" placeholder="Type here">
+          </div>
+          <button type="submit" class="btn btn-default">Translate and Play</button>
+        </form>
+    </div>
+    <div class="container" id="google_translate_element" style="padding-top:0"></div>
+
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+      }
+    </script>
+  </body>
+</html>
